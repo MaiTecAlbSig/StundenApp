@@ -1,23 +1,23 @@
-# Verwende das offizielle OpenJDK-Image als Basis
+# Verwende ein leichtgewichtiges JDK 17 Image
 FROM openjdk:17-jdk-slim
 
-# Setze das Arbeitsverzeichnis
+# Setze das Arbeitsverzeichnis im Container
 WORKDIR /app
 
-# Kopiere das gesamte Projekt in den Container
+# Kopiere die Projektdateien in den Container
 COPY . .
 
-# Gib dem Gradle-Wrapper Ausführungsrechte
+# Gradle Wrapper ausführbar machen
 RUN chmod +x ./gradlew
 
-# Baue die Anwendung
-RUN ./gradlew clean installDist
+# Baue das Projekt (wird im build/libs Ordner erzeugt)
+RUN ./gradlew clean shadowJar
 
-# Setze den Startbefehl für die Anwendung
-CMD ["./build/install/com.example.ktor-sample/bin/com.example.ktor-sample"]
+# Definiere die Umgebungsvariable für den Port
+ENV PORT=8080
 
-# Exponiere den Port, auf dem die Ktor-Anwendung läuft
+# Exponiere den Port 8080
 EXPOSE 8080
 
-# Starte die Ktor-Anwendung
-CMD ["./build/install/com.example.ktor-sample/bin/com.example.ktor-sample"]
+# Starte die JAR-Datei (der Name kann variieren, je nachdem wie du deine Anwendung im build.gradle.kts benannt hast)
+CMD ["java", "-jar", "build/libs/com.example.ktor-sample-all.jar"]

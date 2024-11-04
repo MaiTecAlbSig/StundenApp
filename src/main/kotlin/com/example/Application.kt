@@ -15,6 +15,7 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.routing.*
 
 import io.ktor.server.auth.jwt.*
+import kotlinx.serialization.json.Json
 
 
 fun main(args: Array<String>) {
@@ -23,15 +24,20 @@ fun main(args: Array<String>) {
     DatabaseConfig.connect()
     DatabaseInitializer.init()
     // Starte den Server
-    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
+    embeddedServer(Netty, port = System.getenv("PORT")?.toInt() ?:8080, module = Application::module).start(wait = true)
 
 
 }
 
 fun Application.module() {
     configureSecurity()
+
     install(ContentNegotiation) {
-        json() // Standardmäßig JSON als Antwortformat
+        json(Json {
+            prettyPrint = true
+            isLenient = true
+            ignoreUnknownKeys = true
+        })
     }
     // Grundlegende Routen-Konfiguration
     routing {

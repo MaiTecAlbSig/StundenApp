@@ -28,6 +28,10 @@ fun Route.loginRoute() {
     post("/login") {
         val credentials = call.receive<LoginRequest>()
 
+        if (credentials == null) {
+            call.respond(HttpStatusCode.BadRequest, "LoginRequest body missing")
+            return@post
+        }
         // Mitarbeiter mit der angegebenen E-Mail in der Datenbank suchen
         val user = transaction {
             Employees.select { Employees.email eq credentials.email }
@@ -38,7 +42,7 @@ fun Route.loginRoute() {
         // Überprüfen, ob Benutzer gefunden wurde und Passwort korrekt ist
         if (user != null && BCrypt.checkpw(credentials.password, user.first)) {
             val token = generateToken(user.second, user.third) // Token mit Benutzer-ID und Admin-Status erstellen
-            call.respond(LoginResponse(token = token))
+            call.respond(HttpStatusCode.OK, LoginResponse(token = token))
         } else {
             call.respond(HttpStatusCode.Unauthorized, "Invalid email or password")
         }
