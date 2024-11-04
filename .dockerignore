@@ -1,0 +1,6 @@
+# Ignoriere Gradle-Cache und Build-Ordner
+.gradle
+/build
+out
+/buildSrc
+.idea

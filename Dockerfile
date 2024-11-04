@@ -1,20 +1,27 @@
-FROM ubuntu:latest
-LABEL authors="Lucas"
-# Basis-Image
-FROM openjdk:17-jdk-slim
+# Schritt 1: Verwende ein Basis-Image mit JDK 17
+FROM openjdk:17-jdk-slim as build
 
-# Arbeitsverzeichnis setzen
+# Setze das Arbeitsverzeichnis
 WORKDIR /app
 
-# Kopiere alle Dateien und setze die Berechtigungen für gradlew
+# Kopiere die Projektdateien
 COPY . .
-RUN chmod +x ./gradlew
 
-# Abhängigkeiten installieren und Projekt bauen
+# Führe Gradle-Build aus, um die Anwendung zu bauen und zu installieren
+RUN chmod +x ./gradlew
 RUN ./gradlew clean installDist
 
-# Port freigeben
+# Schritt 2: Erstelle ein schlankes Image für die Bereitstellung
+FROM openjdk:17-jdk-slim
+
+# Setze das Arbeitsverzeichnis im schlanken Image
+WORKDIR /app
+
+# Kopiere die gebauten Dateien vom Build-Image
+COPY --from=build /app/build/install/<projektname> /app
+
+# Exponiere den Port, auf dem die Ktor-Anwendung läuft (z. B. 8080)
 EXPOSE 8080
 
-# Start-Befehl für Ktor-Anwendung
-CMD ["./build/install/deine-ktor-anwendung/bin/deine-ktor-anwendung"]
+# Starte die Anwendung
+CMD ["./bin/com.example.ktor-sample"]
