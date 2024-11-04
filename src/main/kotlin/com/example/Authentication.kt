@@ -52,6 +52,7 @@ fun generateToken(userId: Int, isAdmin: Boolean): String {
     val role = if (isAdmin) "admin" else "user"
     val secret = jwtSecret
     return JWT.create()
+        .withSubject("Authentication")
         .withClaim("userId", userId)
         .withClaim("role", role) // Differenziert zwischen "admin" und "user"
         .withExpiresAt(Date(System.currentTimeMillis() + 3_600_000)) // Token 1 Stunde gültig

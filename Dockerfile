@@ -19,3 +19,5 @@ CMD ["./build/install/com.example.ktor-sample/bin/com.example.ktor-sample"]
 # Exponiere den Port, auf dem die Ktor-Anwendung läuft
 EXPOSE 8080
 
+# Starte die Ktor-Anwendung
+CMD ["./build/install/com.example.ktor-sample/bin/com.example.ktor-sample"]
