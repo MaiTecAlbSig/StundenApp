@@ -6,8 +6,11 @@ FROM openjdk:17-jdk-slim
 # Arbeitsverzeichnis setzen
 WORKDIR /app
 
-# Abhängigkeiten installieren und Projekt bauen
+# Kopiere alle Dateien und setze die Berechtigungen für gradlew
 COPY . .
+RUN chmod +x ./gradlew
+
+# Abhängigkeiten installieren und Projekt bauen
 RUN ./gradlew clean installDist
 
 # Port freigeben
