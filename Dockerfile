@@ -18,7 +18,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Kopiere die gebauten Dateien vom Build-Image
-COPY --from=build /app/build/install/<projektname> /app
+COPY --from=build /app/build/install/com.example.ktor-sample/app
 
 # Exponiere den Port, auf dem die Ktor-Anwendung läuft (z. B. 8080)
 EXPOSE 8080
