@@ -1,5 +1,5 @@
 // EmployeeRoutes.kt
-package com.example.Routes
+package com.example.routes
 
 import io.ktor.server.response.*
 import io.ktor.server.request.*

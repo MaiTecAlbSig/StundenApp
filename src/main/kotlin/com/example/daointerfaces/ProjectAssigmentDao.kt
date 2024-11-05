@@ -1,4 +1,3 @@
 package com.example.daointerfaces
 
-interface ProjectAssigmentDao {
-}
+interface ProjectAssigmentDao

@@ -5,7 +5,10 @@ package com.example
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import com.example.Routes.*
+import com.example.routes.*
+import com.example.daoImplemenations.CustomerDaoImpl
+import com.example.daointerfaces.CustomerDao
+import com.example.plugins.configureRouting
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -21,8 +24,7 @@ import kotlinx.serialization.json.Json
 fun main(args: Array<String>) {
 
     println("Test")
-    DatabaseConfig.connect()
-    DatabaseInitializer.init()
+
     // Starte den Server
     embeddedServer(Netty, port = System.getenv("PORT")?.toInt() ?:8080, module = Application::module).start(wait = true)
 
@@ -32,6 +34,11 @@ fun main(args: Array<String>) {
 fun Application.module() {
     configureSecurity()
 
+    DatabaseConfig.connect()
+    DatabaseInitializer.init()
+
+
+
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true
@@ -39,9 +46,10 @@ fun Application.module() {
             ignoreUnknownKeys = true
         })
     }
+
     // Grundlegende Routen-Konfiguration
     routing {
-        customerRoutes()           // Kundenverwaltung
+        customerRoutes(CustomerDaoImpl())
         employeeRoutes()           // Mitarbeiterverwaltung
         projectRoutes()            // Projektverwaltung
         projectAssignmentRoutes()  // Projektzuweisungen

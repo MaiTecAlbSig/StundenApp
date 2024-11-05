@@ -1,4 +1,4 @@
-package com.example.Routes
+package com.example.routes
 
 import com.example.tables.ProjectAssignments
 import io.ktor.server.response.*
