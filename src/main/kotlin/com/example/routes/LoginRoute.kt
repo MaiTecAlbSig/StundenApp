@@ -16,9 +16,9 @@ fun Route.loginRoute() {
     route("/login") {
 
         post {
-            val params = call.receive<LoginRequest>()
-            val email = params.email
-            val password = params.password
+            val params = call.receiveParameters()
+            val email = params["email"] ?: return@post call.respond(HttpStatusCode.BadRequest, "Email required")
+            val password = params["password"] ?: return@post call.respond(HttpStatusCode.BadRequest, "Password required")
             val authUser = EmployeeDaoImpl().getAuthentication(email)
             println(email)
             println(password)
