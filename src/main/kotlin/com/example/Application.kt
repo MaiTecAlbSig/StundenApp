@@ -53,7 +53,7 @@ fun Application.module() {
         projectNoteRoutes(ProjectNoteDaoImpl())
         hourRoutes(HourDaoImpl())
         changeRequestRoutes(ChangeRequestDaoImpl())
-        //loginRoute()
+        loginRoute()
 
 
         println("Routing done..")
@@ -72,13 +72,15 @@ fun Application.configureSecurity() {
                     .build()
             )
             validate { credential ->
-                if (credential.payload.getClaim("userId").asInt() != null) {
+                if (credential.payload.getClaim("userId").asInt() != null && credential.payload.getClaim("role").asString() != null) {
                     JWTPrincipal(credential.payload)
                 } else null
             }
         }
     }
 }
+
+
 
 
 
