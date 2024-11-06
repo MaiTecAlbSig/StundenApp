@@ -54,6 +54,10 @@ class EmployeeDaoImpl : EmployeeDao {
         Employees.deleteWhere { Employees.id eq id } > 0
     }
 
+    override suspend fun getAuthentication(email: String): Employee? = dbQuery{
+        Employees.select { Employees.email eq email }.map(::resultRowToEmployee).singleOrNull()
+    }
+
     private fun resultRowToEmployee(row : ResultRow) = Employee(
         id = row[Employees.id],
         name = row[Employees.name],

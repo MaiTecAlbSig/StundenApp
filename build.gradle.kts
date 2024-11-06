@@ -34,23 +34,18 @@ dependencies {
     implementation("io.ktor:ktor-server-core:2.0.0") // Deine Ktor-Abhängigkeiten
     implementation("io.ktor:ktor-server-netty:2.0.0")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.1")
-    implementation("org.jetbrains.exposed:exposed-core:0.41.1")
-    implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
+
     implementation("org.postgresql:postgresql:42.7.2") // PostgreSQL-Treiber
     implementation("org.jetbrains.exposed:exposed-core:0.41.1")
     implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
-    implementation("io.ktor:ktor-server-core:2.0.0") // oder deine Version
-    implementation("io.ktor:ktor-server-netty:2.0.0") // wichtig für den Server
+
     implementation("io.ktor:ktor-server-host-common:2.0.0")
     implementation("io.ktor:ktor-server-call-logging:2.0.0")
     implementation("io.ktor:ktor-server-status-pages:2.0.0")
     implementation("io.ktor:ktor-server-content-negotiation:2.0.0")
     implementation("ch.qos.logback:logback-classic:1.4.12") // Für Logging
 
-    implementation("io.ktor:ktor-server-content-negotiation:2.0.0") // Ktor ContentNegotiation Plugin
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.0.0")  // Ktor JSON Serialisierung
 
     testImplementation("io.ktor:ktor-server-tests:2.0.0") // Abhängigkeit für Ktor-Tests
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.31") // Abhängigkeit für JUnit-Tests
