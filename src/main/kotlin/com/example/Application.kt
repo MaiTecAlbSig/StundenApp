@@ -7,8 +7,6 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.example.daoImplemenations.*
 import com.example.routes.*
-import com.example.daointerfaces.CustomerDao
-import com.example.plugins.configureRouting
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -55,7 +53,7 @@ fun Application.module() {
         projectNoteRoutes(ProjectNoteDaoImpl())
         hourRoutes(HourDaoImpl())
         changeRequestRoutes(ChangeRequestDaoImpl())
-        loginRoute()
+        //loginRoute()
 
 
         println("Routing done..")
