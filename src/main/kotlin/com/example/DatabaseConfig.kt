@@ -2,7 +2,9 @@ package com.example
 
 // DatabaseConfig.kt
 
+import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
 object DatabaseConfig {
     fun connect() {
@@ -19,4 +21,6 @@ object DatabaseConfig {
         println("Datenbankverbindung hergestellt") // Testausgabe
 
     }
+    suspend fun <T> dbQuery(block: suspend () -> T): T =
+        newSuspendedTransaction(Dispatchers.IO) { block() }
 }
