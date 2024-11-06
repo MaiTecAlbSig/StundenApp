@@ -55,6 +55,7 @@ fun Application.module() {
         projectNoteRoutes(ProjectNoteDaoImpl())
         hourRoutes(HourDaoImpl())
         changeRequestRoutes(ChangeRequestDaoImpl())
+        loginRoute()
 
 
         println("Routing done..")
