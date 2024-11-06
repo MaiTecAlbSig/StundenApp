@@ -7,7 +7,9 @@ data class ChangeRequest(
     val id: Int,
     val employeeId: Int,
     val projectId: Int,
-    val requestedChange: String,
+    val requestType: String,
+    val requestDetails: String,
     val status: String,     // Z. B. "Pending", "Approved", "Rejected"
-    val timestamp: String   // Alternativ Date oder LocalDateTime
+    val createdAt: String,   // Alternativ Date oder LocalDateTime
+    val reviewedAt: String?
 )

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class ProjectAssignment(
     val projectId: Int,
     val employeeId: Int,
-    val role: String
+    val role: String?
 )

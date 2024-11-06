@@ -3,7 +3,7 @@ package com.example.daoImplemenations
 import com.example.DatabaseConfig.dbQuery
 import com.example.daointerfaces.EmployeeDao
 import com.example.datamodels.Employee
-import com.example.tables.Customers
+
 import com.example.tables.Employees
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
@@ -28,7 +28,7 @@ class EmployeeDaoImpl : EmployeeDao {
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToEmployee)
     }
 
-    override suspend fun updateEmployee(id: Int, name: String?, position: String?, email: String?, isAdmin: Boolean?): Boolean = dbQuery {
+    override suspend fun updateEmployee(id: Int, name: String?, position: String?, email: String?, passwordHash: String?, isAdmin: Boolean?): Boolean = dbQuery {
         Employees.update({Employees.id eq id}) { row ->
             if (name != null){
                 row[Employees.name] = name
@@ -39,6 +39,9 @@ class EmployeeDaoImpl : EmployeeDao {
             if (email != null){
                 row[Employees.email] = email
             }
+            if (passwordHash != null){
+                row[Employees.password_hash] = passwordHash
+            }
             if (isAdmin != null){
                 row[Employees.isAdmin] = isAdmin
             }
@@ -46,14 +49,9 @@ class EmployeeDaoImpl : EmployeeDao {
         } > 0
     }
 
-    override suspend fun updatePassword(email: String, oldPassword: String, newPassword: String): Boolean {
-        Employees.update({ Employees.email eq email }) { row ->
 
-        }
-    }
-
-    override suspend fun deleteEmployee(id: Int): Boolean {
-        TODO("Not yet implemented")
+    override suspend fun deleteEmployee(id: Int): Boolean = dbQuery {
+        Employees.deleteWhere { Employees.id eq id } > 0
     }
 
     private fun resultRowToEmployee(row : ResultRow) = Employee(

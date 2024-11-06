@@ -1,6 +1,7 @@
 package com.example.datamodels
 
 import kotlinx.serialization.Serializable
+import java.math.BigDecimal
 
 @Serializable
 data class WorkHours(
@@ -8,5 +9,6 @@ data class WorkHours(
     val employeeId: Int,
     val projectId: Int,
     val hours: Double,
-    val date: String         // Alternativ Date oder LocalDate
+    val date: String, // Alternativ Date oder LocalDate
+    val description: String?
 )

@@ -5,8 +5,8 @@ package com.example
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.example.daoImplemenations.*
 import com.example.routes.*
-import com.example.daoImplemenations.CustomerDaoImpl
 import com.example.daointerfaces.CustomerDao
 import com.example.plugins.configureRouting
 import io.ktor.serialization.kotlinx.json.*
@@ -35,7 +35,6 @@ fun Application.module() {
     configureSecurity()
 
     DatabaseConfig.connect()
-    DatabaseInitializer.init()
 
 
 
@@ -50,13 +49,15 @@ fun Application.module() {
     // Grundlegende Routen-Konfiguration
     routing {
         customerRoutes(CustomerDaoImpl())
-        employeeRoutes()           // Mitarbeiterverwaltung
-        projectRoutes()            // Projektverwaltung
-        projectAssignmentRoutes()  // Projektzuweisungen
-        projectNotesRoutes()       // Projektnotizen
-        hoursRoutes()              // Stundenerfassung
-        changeRequestRoutes()      // Änderungsanfragen
-        loginRoute()
+        employeeRoutes(EmployeeDaoImpl())
+        projectRoutes(ProjectDaoImpl())
+        projectAssignmentRoutes(ProjectAssignmentDaoImpl())
+        projectNoteRoutes(ProjectNoteDaoImpl())
+        hourRoutes(HourDaoImpl())
+        changeRequestRoutes(ChangeRequestDaoImpl())
+
+
+        println("Routing done..")
     }
 }
 

@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 data class ProjectNote(
     val id: Int,
     val projectId: Int,
-    val content: String,
+    val note: String,
     val timestamp: String    // Alternativ Date oder LocalDateTime
 )

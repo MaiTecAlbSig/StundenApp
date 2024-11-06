@@ -55,6 +55,15 @@ fun Route.customerRoutes(customerDao: CustomerDao) {
             )
             call.respond(HttpStatusCode.OK, "Customer updated successfully")
         }
+        delete("{id}") {
+            val id = call.parameters["id"]?.toIntOrNull()
+            if (id == null) {
+                call.respond(HttpStatusCode.BadRequest, "Invalid employee ID")
+                return@delete
+            }
+            customerDao.deleteCustomer(id)
+            call.respond(HttpStatusCode.OK, "Customer deleted successfully")
+        }
 
     }
 }
