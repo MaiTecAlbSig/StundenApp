@@ -16,7 +16,7 @@ import org.mindrot.jbcrypt.BCrypt
 import java.util.*
 
 fun Route.employeeRoutes(employeeDao: EmployeeDao) {
-    authenticate("auth-jwt") {
+    //authenticate("auth-jwt") {
         route("/employee") {
             post {
                 val principal = call.principal<JWTPrincipal>()
@@ -87,6 +87,6 @@ fun Route.employeeRoutes(employeeDao: EmployeeDao) {
                 call.respond(HttpStatusCode.OK, "Employee deleted successfully")
             }
         }
-    }
+    //}
 }
 
