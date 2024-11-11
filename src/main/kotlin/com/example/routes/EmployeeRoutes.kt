@@ -20,8 +20,8 @@ fun Route.employeeRoutes(employeeDao: EmployeeDao) {
         route("/employee") {
             post {
                 val principal = call.principal<JWTPrincipal>()
-                val userId = principal?.payload?.getClaim("userId")?.asInt() ?: error("userId darf nicht null sein")
-                val role = principal?.payload?.getClaim("role")?.asString() ?: error("role darf nicht null sein")
+                //val userId = principal?.payload?.getClaim("userId")?.asInt() ?: error("userId darf nicht null sein")
+                //val role = principal?.payload?.getClaim("role")?.asString() ?: error("role darf nicht null sein")
 
                 val params = call.receiveParameters()
                 val name = params["name"] ?: return@post call.respond(HttpStatusCode.BadRequest, "Name required")
