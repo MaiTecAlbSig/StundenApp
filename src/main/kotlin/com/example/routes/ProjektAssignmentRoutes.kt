@@ -67,7 +67,7 @@ fun Route.projectAssignmentRoutes(projectAssigmentDao: ProjectAssigmentDao) {
             call.respond(HttpStatusCode.Created, "Project assignment created successfully")
         }
 
-        put("{project_id}/{employee_id}"){
+        put("/{project_id}/{employee_id}"){
             val projectId = call.parameters["project_id"]?.toIntOrNull()
             if (projectId == null) {
                 call.respond(HttpStatusCode.BadRequest, "Invalid project ID")
