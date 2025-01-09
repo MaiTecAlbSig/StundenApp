@@ -4,6 +4,7 @@ import com.example.DatabaseConfig.dbQuery
 import com.example.daointerfaces.ChangeRequestDao
 import com.example.datamodels.ChangeRequest
 import com.example.tables.ChangeRequests
+import com.example.tables.ProjectNotes
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
@@ -40,7 +41,7 @@ class ChangeRequestDaoImpl: ChangeRequestDao {
     }
 
     override suspend fun updateChangeRequest(changeRequestId: Int, requestType: String?, requestDetails: String?, status: String?, reviewedAt: String): Boolean = dbQuery {
-        ChangeRequests.update {
+        ChangeRequests.update ({ ChangeRequests.id eq changeRequestId}){
             if (requestType != null) {
                 it[ChangeRequests.request_type] = requestType
             }
