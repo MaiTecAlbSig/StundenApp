@@ -61,6 +61,12 @@ fun Route.employeeRoutes(employeeDao: EmployeeDao) {
             }
 
             put("{id}") {
+                val principal = call.principal<JWTPrincipal>()
+                val role = principal?.payload?.getClaim("role")?.asString() ?: error("role darf nicht null sein")
+                if (role != "admin") {
+                    call.respond(HttpStatusCode.Forbidden, "Admin access required")
+                    return@put
+                }
                 val id = call.parameters["id"]?.toIntOrNull()
                 if (id == null) {
                     call.respond(HttpStatusCode.BadRequest, "Invalid employee ID")
@@ -83,6 +89,12 @@ fun Route.employeeRoutes(employeeDao: EmployeeDao) {
                 val id = call.parameters["id"]?.toIntOrNull()
                 if (id == null) {
                     call.respond(HttpStatusCode.BadRequest, "Invalid employee ID")
+                    return@delete
+                }
+                val principal = call.principal<JWTPrincipal>()
+                val role = principal?.payload?.getClaim("role")?.asString() ?: error("role darf nicht null sein")
+                if (role != "admin") {
+                    call.respond(HttpStatusCode.Forbidden, "Admin access required")
                     return@delete
                 }
                 employeeDao.deleteEmployee(id)
