@@ -14,7 +14,6 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.routing.*
-
 import io.ktor.server.auth.jwt.*
 import kotlinx.serialization.json.Json
 
@@ -23,9 +22,7 @@ fun main(args: Array<String>) {
 
     println("Test")
 
-    // Starte den Server
     embeddedServer(Netty, port = System.getenv("PORT")?.toInt() ?:8080, module = Application::module).start(wait = true)
-
 
 }
 
@@ -68,7 +65,7 @@ fun Application.configureSecurity() {
             realm = "ktor.io"
             verifier(
                 JWT
-                    .require(Algorithm.HMAC256(jwtSecret)) // Verwende hier den richtigen geheimen Schlüssel
+                    .require(Algorithm.HMAC256(jwtSecret))
                     .build()
             )
             validate { credential ->

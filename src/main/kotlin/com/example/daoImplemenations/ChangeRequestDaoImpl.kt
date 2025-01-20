@@ -4,7 +4,6 @@ import com.example.DatabaseConfig.dbQuery
 import com.example.daointerfaces.ChangeRequestDao
 import com.example.datamodels.ChangeRequest
 import com.example.tables.ChangeRequests
-import com.example.tables.ProjectNotes
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 

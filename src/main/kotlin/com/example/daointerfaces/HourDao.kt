@@ -1,7 +1,6 @@
 package com.example.daointerfaces
 
 import com.example.datamodels.WorkHours
-import com.example.tables.Hours
 
 interface HourDao{
     suspend fun getAllHours(): List<WorkHours>

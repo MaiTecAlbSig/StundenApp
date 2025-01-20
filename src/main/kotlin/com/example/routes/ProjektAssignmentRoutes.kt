@@ -1,16 +1,13 @@
 package com.example.routes
 
 import com.example.daointerfaces.ProjectAssigmentDao
-import com.example.tables.ProjectAssignments
 import io.ktor.http.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+
 
 fun Route.projectAssignmentRoutes(projectAssigmentDao: ProjectAssigmentDao) {
     authenticate("auth-jwt") {

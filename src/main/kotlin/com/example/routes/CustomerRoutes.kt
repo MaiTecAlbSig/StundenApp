@@ -1,7 +1,6 @@
 package com.example.routes
 
 import com.example.daointerfaces.CustomerDao
-import com.example.tables.Employees.email
 import io.ktor.http.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*

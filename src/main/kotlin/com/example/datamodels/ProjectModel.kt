@@ -8,6 +8,6 @@ data class Project(
     val name: String,
     val description: String?,
     val customerId: Int?,
-    val startDate: String?,   // Alternativ kann ein Date-Typ verwendet werden, je nach Bedarf
+    val startDate: String?,
     val endDate: String?
 )

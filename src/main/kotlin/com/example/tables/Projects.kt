@@ -1,9 +1,8 @@
 package com.example.tables
 
-import com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date
-import kotlinx.serialization.Serializable
+
 import org.jetbrains.exposed.sql.Table
-import java.time.LocalDate
+
 
 object Projects : Table() {
     val id = integer("id").autoIncrement()

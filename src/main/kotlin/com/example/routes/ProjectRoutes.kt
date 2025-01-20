@@ -2,7 +2,6 @@ package com.example.routes
 
 import com.example.daoImplemenations.ProjectAssignmentDaoImpl
 import com.example.daointerfaces.ProjectDao
-import com.example.datamodels.ProjectAssignment
 import io.ktor.http.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*

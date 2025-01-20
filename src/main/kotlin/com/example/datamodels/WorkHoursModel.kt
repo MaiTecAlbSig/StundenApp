@@ -9,6 +9,6 @@ data class WorkHours(
     val employeeId: Int,
     val projectId: Int,
     val hours: Double,
-    val date: String, // Alternativ Date oder LocalDate
+    val date: String,
     val description: String?
 )
