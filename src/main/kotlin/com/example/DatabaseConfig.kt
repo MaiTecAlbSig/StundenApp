@@ -16,7 +16,7 @@ object DatabaseConfig {
             user = dbUser,
             password = dbPassword
         )
-        println("Datenbankverbindung hergestellt") // Testausgabe
+        println("Datenbankverbindung hergestellt")
 
     }
     suspend fun <T> dbQuery(block: suspend () -> T): T =
